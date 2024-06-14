@@ -11,7 +11,7 @@ class PersonaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,21 +22,21 @@ class PersonaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstName' => 'required|string',
-            'lastName' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
         ];
     }
 
     public function messages() :array
     {
         return [
-            //Regole firstName
-            'firstName.required' => 'Il nome é obbligatorio',
-            'firstName.string' => 'Il nome dev\'essere un testo',
+            //first_name rules
+            'first_name.required' => 'Il nome é obbligatorio',
+            'first_name.string' => 'Il nome dev\'essere un testo',
 
-            //Regole lastName
-            'lastName.required' => 'Il cognome é obbligatorio',
-            'lastName.string' => 'Il cognome dev\'essere un testo',
+            //last_name rules
+            'last_name.required' => 'Il cognome é obbligatorio',
+            'last_name.string' => 'Il cognome dev\'essere un testo',
         ];
     }
 }

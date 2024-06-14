@@ -17,7 +17,7 @@ class EventController extends Controller
     public function store(EventRequest $request)
     {
         Event::create([
-            'eventName' => $request->eventName,
+            'name' => $request->name,
             'date' => $request->date,
         ]);
 
@@ -39,11 +39,11 @@ class EventController extends Controller
     public function update(EventRequest $request, Event $event)
     {
         $event->update([
-            'eventName' => $request->eventName,
+            'name' => $request->name,
             'date' => $request->date,
         ]);
 
-        return redirect()->route('events.show')->with('message', 'Evento modificato con successo');
+        return redirect()->route('events.show', $event)->with('message', 'Evento modificato con successo');
     }
 
     public function destroy(Event $event)

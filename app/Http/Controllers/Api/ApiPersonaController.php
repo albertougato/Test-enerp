@@ -23,8 +23,8 @@ class ApiPersonaController extends Controller
     public function store(PersonaRequest $request)
     {
         $persona = Persona::create([
-            'firstName' => $request->firstName,
-            'lastName' => $request->lastName
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name
         ]);
 
         return response()->json($persona);
@@ -44,8 +44,8 @@ class ApiPersonaController extends Controller
     public function update(PersonaRequest $request, Persona $persona)
     {
         $persona->update([
-            'firstName' => $request->firstName,
-            'lastName' => $request->lastName
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name
         ]);
 
         return response()->json($persona);

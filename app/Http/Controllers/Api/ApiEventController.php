@@ -23,7 +23,7 @@ class ApiEventController extends Controller
     public function store(EventRequest $request)
     {
         $event = Event::create([
-            'eventName' => $request->eventName,
+            'name' => $request->name,
             'date' => $request->date,
         ]);
 
@@ -44,7 +44,7 @@ class ApiEventController extends Controller
     public function update(EventRequest $request, Event $event)
     {
         $event->update([
-            'eventName' => $request->eventName,
+            'name' => $request->name,
             'date' => $request->date,
         ]);
 

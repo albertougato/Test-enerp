@@ -22,7 +22,7 @@ class EventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'eventName' => 'required|string',
+            'name' => 'required|string',
             'date' => 'required|date',
         ];
     }
@@ -30,11 +30,11 @@ class EventRequest extends FormRequest
     public function messages() :array
     {
         return [
-            //Regole eventName
-            'eventName.required' => 'Il titolo é obbligatorio',
-            'eventName.string' => 'Il titolo dev\'essere un testo',
+            //Name rules
+            'name.required' => 'Il titolo é obbligatorio',
+            'name.string' => 'Il titolo dev\'essere un testo',
 
-            //Regole date
+            //Date rules
             'date.required' => 'La data é obbligatoria',
             'date.date' => 'Inserisci una data valida',
         ];

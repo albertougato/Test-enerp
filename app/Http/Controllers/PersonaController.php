@@ -22,11 +22,11 @@ class PersonaController extends Controller
     public function store(PersonaRequest $request)
     {
         Persona::create([
-            'firstName' => $request->firstName,
-            'lastName' => $request->lastName
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name
         ]);
 
-        return redirect()->route('personas.create');
+        return redirect()->route('personas.create')->with('message', 'Persona creata con successo');
     }
 
     public function edit(Persona $persona)
@@ -37,17 +37,17 @@ class PersonaController extends Controller
     public function update(PersonaRequest $request, Persona $persona)
     {
         $persona->update([
-            'firstName' => $request->firstName,
-            'lastName' => $request->lastName
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name
         ]);
 
-        return redirect()->route('events.show')->with('message', 'persona modificata con successo');
+        return redirect()->route('personas.index')->with('message', 'persona modificata con successo');
     }
 
     public function destroy(Persona $persona)
     {
         $persona->delete();
 
-        return redirect()->route('events.show')->with('message', 'persona eliminata con successo');
+        return redirect()->route('personas.index')->with('message', 'persona eliminata con successo');
     }
 }
