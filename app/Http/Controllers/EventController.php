@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Persona;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 
@@ -25,7 +26,9 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
-        return view('events.show', compact('event'));
+        $personas = Persona::whereNull('event_id')->get();
+
+        return view('events.show', compact('event', 'personas'));
     }
 
     public function edit(Event $event)
@@ -48,5 +51,23 @@ class EventController extends Controller
         $event->delete();
 
         return redirect()->route('home')->with('message', 'Evento eliminato con successo');
+    }
+
+    //Adding/removing personas to event logic
+    public function addPersona(Request $request, Event $event)
+    {
+        $persona = Persona::findOrFail($request->input('persona_id'));
+        $persona->event_id = $event->id;
+        $persona->save();
+
+        return redirect()->route('events.show', $event);
+    }
+
+    public function removePersona(Event $event, Persona $persona)
+    {
+        $persona->event_id = null;
+        $persona->save();
+
+        return redirect()->route('events.show', $event);
     }
 }

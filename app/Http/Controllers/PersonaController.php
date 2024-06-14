@@ -8,6 +8,12 @@ use App\Http\Requests\PersonaRequest;
 
 class PersonaController extends Controller
 {
+    public function index()
+    {
+        $personas = Persona::all();
+        return view('personas.index', compact('personas'));
+    }
+
     public function create()
     {
         return view('personas.create');
