@@ -8,14 +8,14 @@
             @method('PUT')
 
             {{-- name edit --}}
-            <div class="mb-4">
+            <div class="mb-4 w-1/3">
                 <label for="first_name" class="block text-sm font-medium text-gray-700">Nome</label>
                 <input type="text" name="first_name" id="first_name" value="{{ $persona->first_name }}"
                     class="block w-full mt-1 rounded-md border-gray-300 shadow-sm">
             </div>
 
             {{-- last name edit --}}
-            <div class="mb-4">
+            <div class="mb-4 w-1/3">
                 <label for="last_name" class="block text-sm font-medium text-gray-700">Cognome</label>
                 <input type="text" name="last_name" id="last_name" value="{{ $persona->last_name }}"
                     class="block w-full mt-1 rounded-md border-gray-300 shadow-sm">

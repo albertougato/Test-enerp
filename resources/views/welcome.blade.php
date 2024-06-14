@@ -7,7 +7,7 @@
         {{-- event list --}}
         <div class="mt-6">
             @foreach ($events as $event)
-                <div class="bg-white p-4 mb-4 rounded shadow">
+                <div class="bg-white p-4 mb-4 w-1/2 rounded shadow">
                     <h2 class="text-xl font-semibold">{{ $event->name }}</h2>
                     <p>{{ $event->date }}</p>
                     <a href="{{ route('events.show', $event) }}" class="text-blue-500">Dettagli</a>

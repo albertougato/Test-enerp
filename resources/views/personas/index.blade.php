@@ -15,7 +15,7 @@
         {{-- personas list --}}
         <div class="mt-6">
             @foreach ($personas as $persona)
-                <div class="bg-white p-4 mb-4 rounded shadow">
+                <div class="bg-white p-4 mb-4 w-1/2 rounded shadow">
                     <h2 class="text-xl font-semibold">{{ $persona->first_name }} {{ $persona->last_name }}</h2>
                     <a href="{{ route('personas.edit', $persona) }}" class="text-blue-500">Modifica</a>
                 </div>
