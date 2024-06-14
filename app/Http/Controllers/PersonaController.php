@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use App\Http\Requests\PersonaRequest;
 
 class PersonaController extends Controller
 {
@@ -12,14 +13,12 @@ class PersonaController extends Controller
         return view('personas.create');
     }
 
-    public function store(Request $request)
+    public function store(PersonaRequest $request)
     {
-        $validatedData = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+        Persona::create([
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName
         ]);
-
-        Persona::create($validatedData);
 
         return redirect()->route('personas.create');
     }
@@ -29,22 +28,20 @@ class PersonaController extends Controller
         return view('personas.edit', compact('persona'));
     }
 
-    public function update(Request $request, Persona $persona)
+    public function update(PersonaRequest $request, Persona $persona)
     {
-        $validatedData = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+        $persona->update([
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName
         ]);
 
-        $persona->update($validatedData);
-
-        return redirect()->route('events.index');
+        return redirect()->route('events.show')->with('message', 'persona modificata con successo');
     }
 
     public function destroy(Persona $persona)
     {
         $persona->delete();
 
-        return redirect()->route('events.index');
+        return redirect()->route('events.show')->with('message', 'persona eliminata con successo');
     }
 }

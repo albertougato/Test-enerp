@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Http\Requests\EventRequest;
 
 class EventController extends Controller
 {
@@ -12,14 +13,12 @@ class EventController extends Controller
         return view('events.create');
     }
 
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'date' => 'required|date',
+        Event::create([
+            'eventName' => $request->eventName,
+            'date' => $request->date,
         ]);
-
-        Event::create($validatedData);
 
         return redirect()->route('home')->with('message', 'Evento creato con successo');
     }
@@ -34,16 +33,14 @@ class EventController extends Controller
         return view('events.edit', compact('event'));
     }
 
-    public function update(Request $request, Event $event)
+    public function update(EventRequest $request, Event $event)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'date' => 'required|date',
+        $event->update([
+            'eventName' => $request->eventName,
+            'date' => $request->date,
         ]);
 
-        $event->update($validatedData);
-
-        return redirect()->route('events.edit')->with('message', 'Evento modificato con successo');
+        return redirect()->route('events.show')->with('message', 'Evento modificato con successo');
     }
 
     public function destroy(Event $event)

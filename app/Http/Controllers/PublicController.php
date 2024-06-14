@@ -9,7 +9,7 @@ class PublicController extends Controller
 {
     public function home()
     {
-        $events = Event::all()->orderBy('date');
+        $events = Event::all();
 
         return view('welcome', compact('events'));
     }

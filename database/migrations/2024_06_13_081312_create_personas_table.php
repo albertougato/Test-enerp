@@ -25,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        //da controllare se droppa senza problemi o devo prima droppare foreignId
         Schema::dropIfExists('personas');
     }
 };
