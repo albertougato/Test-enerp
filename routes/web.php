@@ -14,7 +14,6 @@ Route::prefix('events')->group(function () {
     Route::get('/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/{event}', [EventController::class, 'destroy'])->name('events.destroy');
-
     //Adding/removing personas routes
     Route::post('/{event}/add_persona', [EventController::class, 'addPersona'])->name('events.add_persona');
     Route::delete('/{event}/remove_persona/{persona}', [EventController::class, 'removePersona'])->name('events.remove_persona');

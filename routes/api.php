@@ -14,6 +14,10 @@ Route::get('/events/{event}', [ApiEventController::class, 'show']);
 Route::post('/events', [ApiEventController::class, 'store']);
 Route::put('/events/{event}', [ApiEventController::class, 'update']);
 Route::delete('/events/{event}', [ApiEventController::class, 'destroy']);
+//Adding removing personas fom events routes
+Route::post('/events/{event}/add-persona', [ApiEventController::class, 'addPersona']);
+Route::delete('/events/{event}/remove-persona/{persona}', [ApiEventController::class, 'removePersona']);
+
 
 Route::get('/personas', [ApiPersonaController::class, 'index']);
 Route::get('/personas/{persona}', [ApiPersonaController::class, 'show']);

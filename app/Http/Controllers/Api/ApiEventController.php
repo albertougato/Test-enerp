@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Event;
+use App\Models\Persona;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddPersonaToEventRequest;
 
 class ApiEventController extends Controller
 {
@@ -59,5 +61,21 @@ class ApiEventController extends Controller
         $event->delete();
 
         return response()->json(null);
+    }
+
+    //Adding/remoging personas from events
+    public function addPersona(AddPersonaToEventRequest $request, Event $event)
+    {
+        $persona = Persona::findOrFail($request->input('persona_id'));
+        $event->personas()->attach($persona);
+
+        return response()->json();
+    }
+
+    public function removePersona(Event $event, Persona $persona)
+    {
+        $event->personas()->detach($persona);
+
+        return response()->json();
     }
 }
