@@ -29,7 +29,7 @@ class ApiEventController extends Controller
             'date' => $request->date,
         ]);
 
-        return response()->json($event);
+        return response()->json($event, 201);
     }
 
     /**
@@ -67,15 +67,21 @@ class ApiEventController extends Controller
     public function addPersona(AddPersonaToEventRequest $request, Event $event)
     {
         $persona = Persona::findOrFail($request->input('persona_id'));
-        $event->personas()->attach($persona);
+        $persona->event_id = $event->id;
+        $persona->save();
 
         return response()->json();
     }
 
     public function removePersona(Event $event, Persona $persona)
     {
-        $event->personas()->detach($persona);
+        if ($persona->event_id != $event->id) {
+            return response()->json(['error' => 'La persona non appartiene a questo evento.'], 403);
+        }
 
-        return response()->json();
+        $persona->event_id = null;
+        $persona->save();
+
+        return response()->json(['message' => 'Persona rimossa dall\'evento con successo.'], 200);
     }
 }

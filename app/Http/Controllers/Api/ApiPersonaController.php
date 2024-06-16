@@ -27,7 +27,7 @@ class ApiPersonaController extends Controller
             'last_name' => $request->last_name
         ]);
 
-        return response()->json($persona);
+        return response()->json($persona, 201);
     }
 
     /**
